@@ -2,6 +2,12 @@
 
   <ion-navbar>
     <ion-title>{{ item.name }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="deleteItem()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -12,7 +18,9 @@
   </div>
 
   <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
+    <h2>{{item.name}} - {{item.id}}</h2>
     <p>{{item.about}}</p>
+    <p>{{item.meta | json}}</p>
   </div>
+
 </ion-content>

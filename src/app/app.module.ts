@@ -10,10 +10,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import { Items } from '../mocks/providers/items';
+import { Items } from '../providers/providers';
 import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
@@ -26,7 +26,11 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-export function provideSettings(storage: Storage) {
+/**
+ * Factory to provide settings with default values
+ * @param storage
+ */
+export function provideSettingsFactory(storage: Storage) {
   /**
    * The Settings provider takes a set of default settings for your app.
    *
@@ -59,7 +63,7 @@ export function provideSettings(storage: Storage) {
     IonicStorageModule.forRoot(),
 
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
@@ -70,14 +74,14 @@ export function provideSettings(storage: Storage) {
     Api,
     Items,
     User,
+    { provide: Settings, useFactory: provideSettingsFactory, deps: [Storage] },
+
     Camera,
     SplashScreen,
     StatusBar,
-    { provide: Settings, useFactory: provideSettings, deps: [Storage] },
-    // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
 
-    AngularFireDatabase
+    // Keep this to enable Ionic's runtime error handling during development
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

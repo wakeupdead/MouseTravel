@@ -1,21 +1,40 @@
 import { Injectable } from '@angular/core';
 
 import { Item } from '../../models/item';
-import { Api } from '../api/api';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class Items {
 
-  constructor(public api: Api) { }
+  private itemsCollection: AngularFirestoreCollection<Item>;
+  private itemDoc: AngularFirestoreDocument<Item>;
 
-  query(params?: any) {
-    return this.api.get('/items', params);
+  constructor(private readonly afs: AngularFirestore) {
+    this.itemsCollection = this.afs.collection<Item>('items');
+
+    // log all changes in collection
+    this.itemsCollection.auditTrail().subscribe(console.log);
+  }
+
+  query(params?: any): Observable<Item[]> {
+    return this.itemsCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        const meta = a.payload.doc.metadata;
+        return { id, meta, ...data};
+      });
+    });
   }
 
   add(item: Item) {
+    this.itemsCollection.add(item);
   }
 
   delete(item: Item) {
+    this.itemDoc = this.afs.doc<Item>('items/' + item.id);
+    this.itemDoc.delete();
   }
 
 }
