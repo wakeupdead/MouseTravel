@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- '8'
+script:
+- ionic build
+install:
+- npm install -g firebase-tools cordova ionic @angular/cli
+- yarn
+after_success:
+- firebase deploy --token $FIREBASE_TOKEN
+notifications:
+  email:
+    on_failure: never
+    on_success: never
