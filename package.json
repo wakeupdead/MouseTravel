@@ -44,7 +44,10 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.0.5",
     "@ionic/app-scripts": "3.1.6",
+    "codelyzer": "^4.0.2",
+    "tslint": "^5.8.0",
     "typescript": "2.4.2"
   },
   "description": "An Ionic project",
