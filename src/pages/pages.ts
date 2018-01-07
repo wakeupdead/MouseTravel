@@ -9,5 +9,5 @@ export const LOGIN_PAGE = 'LoginPage';
 
 // The initial root pages for our tabs (remove if not using tabs)
 export const TAB_1_ROOT = 'ListMasterPage';
-export const TAB_2_ROOT = 'SearchPage';
+export const TAB_2_ROOT = 'ChatPage';
 export const TAB_3_ROOT = 'SettingsPage';

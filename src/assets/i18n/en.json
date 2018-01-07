@@ -8,7 +8,7 @@
   "LOGIN_WITH_FACEBOOK": "Login with Facebook",
 
   "TAB1_TITLE": "Items",
-  "TAB2_TITLE": "Search",
+  "TAB2_TITLE": "Chat",
   "TAB3_TITLE": "Settings",
 
   "MAP_TITLE": "Map",
@@ -58,6 +58,5 @@
   "CANCEL_BUTTON": "Cancel",
   "DELETE_BUTTON": "Delete",
 
-  "SEARCH_TITLE": "Search",
-  "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\""
+  "CHAT_TITLE": "Chat"
 }

@@ -18,7 +18,7 @@
 
 ion-toolbar {
   height: 200px !important;
-  font-size: 2vh;
+  font-size: 14px;
   .toolbar-background {
       /*background-color: transparent !important;*/
       background: url("../assets/images/nav-header-bg1.png") !important;
@@ -26,7 +26,7 @@ ion-toolbar {
 
   .toolbar-title {
     padding-top: 160px;
-    font-size: 3vh;
+    font-size: 16px;
     color: color($pal, 900);
     text-align: right;
   }

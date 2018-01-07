@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 
-import { PinPage } from './pin';
+import { ChatPage } from './chat';
 
 @NgModule({
   declarations: [
-    PinPage,
+    ChatPage,
   ],
   imports: [
-    IonicPageModule.forChild(PinPage),
+    IonicPageModule.forChild(ChatPage),
     TranslateModule.forChild()
   ],
   exports: [
-    PinPage
+    ChatPage
   ]
 })
-export class PinPageModule { }
+export class ChatPageModule { }
