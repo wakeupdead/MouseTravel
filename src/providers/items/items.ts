@@ -22,24 +22,20 @@ export class Items {
     return firebase.firestore.FieldValue.serverTimestamp();
   }
 
-  query(params?: any): Observable<Item[]> {
+  query(params?: any): Observable<any[]> {
     return this.itemsCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
-        const meta = a.payload.doc.metadata;
-        return { id, meta, ...data};
+        return { id, ...data};
       });
     });
   }
 
   add(item: Item) {
-    const timestamp = this.timestamp;
-    this.itemsCollection.add({
-      ...item,
-      updatedAt: timestamp,
-      createdAt: timestamp
-    });
+    item.createdAt = this.timestamp;
+    item.updatedAt = this.timestamp;
+    this.itemsCollection.add(item);
   }
 
   delete(item: Item) {

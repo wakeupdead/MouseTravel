@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FIRST_RUN_PAGE, MAIN_PAGE, LOGIN_PAGE } from '../pages/pages';
-import { Settings, User } from '../providers/providers';
+import { Settings, UserService } from '../providers/providers';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -29,7 +29,7 @@ export class MyApp {
     private config: Config,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    public user: User) {
+    public userService: UserService) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -40,7 +40,7 @@ export class MyApp {
     this.initTranslate();
 
     // Assign User stream
-    this.user$ = this.user.getUser();
+    this.user$ = this.userService.getUser();
 
     this.user$.subscribe(
       (user) => {
@@ -89,6 +89,6 @@ export class MyApp {
   logout() {
 
     this.nav.setRoot(FIRST_RUN_PAGE);
-    this.user.logout();
+    this.userService.logout();
   }
 }

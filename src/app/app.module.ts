@@ -15,8 +15,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { Items } from '../providers/providers';
 import { Settings } from '../providers/providers';
-import { User } from '../providers/providers';
-import { Api, LoggingService } from '../providers/providers';
+import { UserService } from '../providers/providers';
+import { Api, LoggingService, ChatService } from '../providers/providers';
 import { MyApp } from './app.component';
 import { firebaseConfig } from './app.firebase.config';
 
@@ -73,8 +73,9 @@ export function provideSettingsFactory(storage: Storage) {
   providers: [
     Api,
     Items,
-    User,
+    UserService,
     LoggingService,
+    ChatService,
     { provide: Settings, useFactory: provideSettingsFactory, deps: [Storage] },
 
     Camera,

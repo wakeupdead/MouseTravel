@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
-import { User, LoggingService } from '../../providers/providers';
+import { UserService, LoggingService } from '../../providers/providers';
 import { MAIN_PAGE } from '../pages';
 
 @IonicPage()
@@ -17,7 +17,7 @@ export class LoginPage {
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: User,
+    public userService: UserService,
     public loggingService: LoggingService,
     public translateService: TranslateService) {
 
@@ -29,7 +29,7 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   login() {
-    this.user.login().then((resp) => {
+    this.userService.login().then((resp) => {
       this.navCtrl.setRoot(MAIN_PAGE);
       this.loggingService.log(this.loginSuccessString + resp.user.displayName, true);
     }, (err) => {
