@@ -3,8 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
-import { WelcomePage } from '../welcome/welcome';
+import { LOGIN_PAGE } from '../pages';
 
 @IonicPage()
 @Component({
@@ -37,7 +36,7 @@ export class PinPage {
   }
 
   login():void {
-    this.navCtrl.setRoot(WelcomePage);
+    this.navCtrl.setRoot(LOGIN_PAGE);
   }
 
 }

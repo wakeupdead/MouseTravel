@@ -5,8 +5,7 @@
   "EMAIL": "Email",
   "USERNAME": "Username",
   "PASSWORD": "Password",
-  "LOGIN": "Sign in",
-  "SIGNUP": "Sign up",
+  "LOGIN_WITH_FACEBOOK": "Login with Facebook",
 
   "TAB1_TITLE": "Items",
   "TAB2_TITLE": "Search",
@@ -28,7 +27,7 @@
 
   "TUTORIAL_SLIDE4_TITLE": "Ready to Play?",
 
-  "WELCOME_INTRO": "The starting point for your next great Ionic app",
+  "LOGIN_INTRO": "Welcome to Mouse Travel! Please login to continue ...",
 
   "SETTINGS_TITLE": "Settings",
   "SETTINGS_OPTION1": "Option 1",
@@ -44,10 +43,8 @@
 
   "LOGIN_TITLE": "Sign in",
   "LOGIN_ERROR": "Unable to sign in. Please check your account information and try again.",
+  "LOGIN_SUCCESS": "Successfully logged in as ",
   "LOGIN_BUTTON": "Sign in",
-  "SIGNUP_TITLE": "Sign up",
-  "SIGNUP_ERROR": "Unable to create account. Please check your account information and try again.",
-  "SIGNUP_BUTTON": "Sign up",
 
   "LIST_MASTER_TITLE": "Items",
 
@@ -60,8 +57,6 @@
   "DONE_BUTTON": "Done",
   "CANCEL_BUTTON": "Cancel",
   "DELETE_BUTTON": "Delete",
-
-  "CARDS_TITLE": "Social",
 
   "SEARCH_TITLE": "Search",
   "SEARCH_PLACEHOLDER": "Search the items list, e.g. \"Donald Duck\""

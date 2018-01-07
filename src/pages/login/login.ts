@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
-import { MainPage } from '../pages';
+import { User, LoggingService } from '../../providers/providers';
+import { MAIN_PAGE } from '../pages';
 
 @IonicPage()
 @Component({
@@ -11,40 +11,30 @@ import { MainPage } from '../pages';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // The account fields for the login form.
-  // If you're using the username field with or without email, make
-  // sure to add it to the type
-  account: { email: string, password: string } = {
-    email: 'test@example.com',
-    password: 'test'
-  };
 
   // Our translated text strings
+  private loginSuccessString: string;
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
     public user: User,
-    public toastCtrl: ToastController,
+    public loggingService: LoggingService,
     public translateService: TranslateService) {
 
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+    this.translateService.get(['LOGIN_ERROR', 'LOGIN_SUCCESS']).subscribe((values) => {
+      this.loginErrorString = values['LOGIN_ERROR'];
+      this.loginSuccessString = values['LOGIN_SUCCESS'];
+    });
   }
 
   // Attempt to login in through our User service
-  doLogin() {
+  login() {
     this.user.login().then((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.setRoot(MAIN_PAGE);
+      this.loggingService.log(this.loginSuccessString + resp.user.displayName, true);
     }, (err) => {
-      this.navCtrl.push(MainPage);
       // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.loggingService.logError(this.loginErrorString);
     });
   }
 }

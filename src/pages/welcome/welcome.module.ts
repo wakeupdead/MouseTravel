@@ -6,7 +6,7 @@ import { WelcomePage } from './welcome';
 
 @NgModule({
   declarations: [
-    WelcomePage,
+    WelcomePage
   ],
   imports: [
     IonicPageModule.forChild(WelcomePage),

@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
-import { Tab1Root } from '../pages';
-import { Tab2Root } from '../pages';
-import { Tab3Root } from '../pages';
+import { TAB_1_ROOT } from '../pages';
+import { TAB_2_ROOT } from '../pages';
+import { TAB_3_ROOT } from '../pages';
 
 @IonicPage()
 @Component({
@@ -12,9 +12,9 @@ import { Tab3Root } from '../pages';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tab1Root: any = Tab1Root;
-  tab2Root: any = Tab2Root;
-  tab3Root: any = Tab3Root;
+  tab1Root: any = TAB_1_ROOT;
+  tab2Root: any = TAB_2_ROOT;
+  tab3Root: any = TAB_3_ROOT;
 
   tab1Title = " ";
   tab2Title = " ";

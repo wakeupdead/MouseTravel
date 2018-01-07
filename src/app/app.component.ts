@@ -4,27 +4,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
-import { FirstRunPage } from '../pages/pages';
+import { FIRST_RUN_PAGE, MAIN_PAGE, LOGIN_PAGE } from '../pages/pages';
 import { Settings, User } from '../providers/providers';
 
 @Component({
   templateUrl: 'app.component.html'
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage = FIRST_RUN_PAGE;
 
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
-    { title: 'Tutorial', component: 'TutorialPage' },
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' }
+    { title: 'Home', component: 'TabsPage' },
+    { title: 'Settings', component: 'SettingsPage' }
   ];
 
   user$: any;
@@ -46,8 +39,18 @@ export class MyApp {
     });
     this.initTranslate();
 
-    // Assigne User stream
+    // Assign User stream
     this.user$ = this.user.getUser();
+
+    this.user$.subscribe(
+      (user) => {
+        if (user) {
+          this.nav.setRoot(MAIN_PAGE);
+        } else {
+          this.nav.setRoot(LOGIN_PAGE);
+        }
+      }
+    );
   }
 
   initTranslate() {
@@ -84,6 +87,8 @@ export class MyApp {
 
 
   logout() {
+
+    this.nav.setRoot(FIRST_RUN_PAGE);
     this.user.logout();
   }
 }
