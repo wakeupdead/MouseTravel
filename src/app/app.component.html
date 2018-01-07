@@ -1,15 +1,30 @@
 <ion-menu [content]="content">
   <ion-header>
     <ion-toolbar>
+
       <ion-title>Mouse Travel</ion-title>
+
+
+
     </ion-toolbar>
+
   </ion-header>
 
   <ion-content>
     <ion-list>
+        <ion-item *ngIf="(user$ | async) != null">
+            <ion-avatar item-start>
+                <img src="{{(user$ | async)?.photoURL}}" />
+              </ion-avatar>
+              <p>Welcome, {{(user$ | async)?.displayName}}</p>
+          </ion-item>
+
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
+      <button menuClose ion-item (click)="logout()">
+          Logout
+        </button>
     </ion-list>
   </ion-content>
 

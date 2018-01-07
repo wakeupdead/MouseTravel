@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Item } from '../../models/item';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -17,6 +18,10 @@ export class Items {
     this.itemsCollection.auditTrail().subscribe(console.log);
   }
 
+  get timestamp() {
+    return firebase.firestore.FieldValue.serverTimestamp();
+  }
+
   query(params?: any): Observable<Item[]> {
     return this.itemsCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
@@ -29,7 +34,12 @@ export class Items {
   }
 
   add(item: Item) {
-    this.itemsCollection.add(item);
+    const timestamp = this.timestamp;
+    this.itemsCollection.add({
+      ...item,
+      updatedAt: timestamp,
+      createdAt: timestamp
+    });
   }
 
   delete(item: Item) {
