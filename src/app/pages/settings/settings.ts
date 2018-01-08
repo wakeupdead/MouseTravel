@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SettingsService } from '../../services/settings.service';
 
-import { Settings } from '../../providers/providers';
+
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -35,7 +36,7 @@ export class SettingsPage {
   subSettings: any = SettingsPage;
 
   constructor(public navCtrl: NavController,
-    public settings: Settings,
+    public settingsService: SettingsService,
     public formBuilder: FormBuilder,
     public navParams: NavParams,
     public translate: TranslateService) {
@@ -61,7 +62,7 @@ export class SettingsPage {
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
-      this.settings.merge(this.form.value);
+      this.settingsService.merge(this.form.value);
     });
   }
 
@@ -81,9 +82,9 @@ export class SettingsPage {
       this.pageTitle = res;
     })
 
-    this.settings.load().then(() => {
+    this.settingsService.load().then(() => {
       this.settingsReady = true;
-      this.options = this.settings.allSettings;
+      this.options = this.settingsService.allSettings;
 
       this._buildForm();
     });

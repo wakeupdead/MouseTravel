@@ -3,9 +3,8 @@
 
   "LOGIN_WITH_FACEBOOK": "Login with Facebook",
 
-  "TAB1_TITLE": "Items",
-  "TAB2_TITLE": "Chat",
-  "TAB3_TITLE": "Settings",
+  "TAB_ITEMS_TITLE": "Items",
+  "TAB_CHAT_TITLE": "Chat",
 
 
   "LOGIN_INTRO": "Welcome to Mouse Travel! Please login to continue ...",

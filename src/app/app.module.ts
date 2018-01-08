@@ -15,11 +15,19 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
-import { Api, ChatService, Settings, Items } from '../providers/providers';
 import { MyApp } from './app.component';
 import { firebaseConfig } from './app.firebase.config';
 import { UserService } from './services/user.service';
 import { LoggingService } from './services/logging.service';
+import { AppStoreModule } from './store/app-store.module';
+import { SettingsService } from './services/settings.service';
+import { ApiService } from './services/api.service';
+import { ChatModule } from '../chat/chat.module';
+import { ItemsModule } from '../items/items.module';
+import { TabsPageModule } from './pages/tabs/tabs.module';
+import { LoginPageModule } from './pages/login/login.module';
+import { SettingsPageModule } from './pages/settings/settings.module';
+import { WelcomePageModule } from './pages/welcome/welcome.module';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -38,7 +46,7 @@ export function provideSettingsFactory(storage: Storage) {
    * You can add new settings options at any time. Once the settings are saved,
    * these values will not overwrite the saved values (this can be done manually if desired).
    */
-  return new Settings(storage, {
+  return new SettingsService(storage, {
     option1: true,
     option2: 'Ionitron J. Framework',
     option3: '3',
@@ -65,19 +73,31 @@ export function provideSettingsFactory(storage: Storage) {
 
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+
+    // NGRX
+    AppStoreModule,
+
+    // App pages
+    LoginPageModule,
+    SettingsPageModule,
+    TabsPageModule,
+    WelcomePageModule,
+
+    // feature modules
+    ChatModule,
+    ItemsModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
   ],
   providers: [
-    Api,
-    Items,
+    ApiService,
     UserService,
     LoggingService,
-    ChatService,
-    { provide: Settings, useFactory: provideSettingsFactory, deps: [Storage] },
+    { provide: SettingsService, useFactory: provideSettingsFactory, deps: [Storage] },
 
     Camera,
     SplashScreen,

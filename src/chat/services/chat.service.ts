@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 
-import { ChatMessage } from '../../models/chat-message';
 import { Observable } from 'rxjs/Observable';
+import { ChatMessage } from '../models/chat-message';
 
 @Injectable()
 export class ChatService {

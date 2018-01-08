@@ -4,18 +4,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
-import { FIRST_RUN_PAGE, MAIN_PAGE, LOGIN_PAGE } from '../pages/pages';
-import { Settings } from '../providers/providers';
 import { Observable } from 'rxjs/Observable';
 import { LoggingService } from './services/logging.service';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
+import { SettingsService } from './services/settings.service';
+import { TabsPage } from './pages/tabs/tabs';
+import { LoginPage } from './pages/login/login';
+import { WelcomePage } from './pages/welcome/welcome';
 
 @Component({
   templateUrl: 'app.component.html'
 })
 export class MyApp {
-  rootPage = FIRST_RUN_PAGE;
+  rootPage = WelcomePage;
 
   @ViewChild(Nav) nav: Nav;
 
@@ -30,7 +32,7 @@ export class MyApp {
   constructor(
     private translate: TranslateService,
     platform: Platform,
-    settings: Settings,
+    settingsService: SettingsService,
     private config: Config,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
@@ -50,9 +52,9 @@ export class MyApp {
     this.userService.getAuthState().subscribe(
       (isAuthenticated) => {
         if (isAuthenticated) {
-          this.nav.setRoot(MAIN_PAGE);
+          this.nav.setRoot(TabsPage);
         } else {
-          this.nav.setRoot(LOGIN_PAGE);
+          this.nav.setRoot(LoginPage);
         }
       }
     );

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
-import { Items } from '../../providers/providers';
 import { Observable } from 'rxjs/Observable';
+import { ItemsService } from '../../services/items.service';
 
 @IonicPage()
 @Component({
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class ListMasterPage {
   currentItems: Observable<Item[]>;
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public itemsService: ItemsService, public modalCtrl: ModalController) {
 
   }
 
@@ -21,7 +21,7 @@ export class ListMasterPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
-    this.currentItems = this.items.query();
+    this.currentItems = this.itemsService.query();
   }
 
   /**
@@ -32,7 +32,7 @@ export class ListMasterPage {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
       if (item) {
-        this.items.add(item);
+        this.itemsService.add(item);
       }
     })
     addModal.present();
@@ -42,7 +42,7 @@ export class ListMasterPage {
    * Delete an item from the list of items.
    */
   deleteItem(item) {
-    this.items.delete(item);
+    this.itemsService.delete(item);
   }
 
   /**

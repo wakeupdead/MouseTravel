@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Items } from '../../providers/providers';
 import { Item } from '../../models/item';
+import { ItemsService } from '../../services/items.service';
 
 @IonicPage()
 @Component({
@@ -12,15 +12,15 @@ import { Item } from '../../models/item';
 export class ItemDetailPage {
   item: Item;
 
-  constructor(public navCtrl: NavController, navParams: NavParams, public items: Items) {
-    this.item = navParams.get('item') || items[0];
+  constructor(public navCtrl: NavController, navParams: NavParams, public itemsService: ItemsService) {
+    this.item = navParams.get('item') || itemsService[0];
   }
 
   /**
    * Delete an item from the list of items.
    */
   deleteItem() {
-    this.items.delete(this.item);
+    this.itemsService.delete(this.item);
     this.navCtrl.pop();
   }
 

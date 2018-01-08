@@ -6,7 +6,6 @@ import { Facebook } from '@ionic-native/facebook';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { NavController, Platform } from 'ionic-angular';
-import { LoginPage } from '../../pages/login/login';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { User } from '../models/user';
 

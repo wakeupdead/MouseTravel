@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Item } from '../../models/item';
+
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
+import { Item } from '../models/item';
 
 @Injectable()
-export class Items {
+export class ItemsService {
 
   private itemsCollection: AngularFirestoreCollection<Item>;
   private itemDoc: AngularFirestoreDocument<Item>;
