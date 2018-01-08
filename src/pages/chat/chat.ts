@@ -27,7 +27,7 @@ export class ChatPage {
 
   ionViewDidLoad() {
     this.messages = this.chatService.query();
-    this.textInput.setFocus();
+    // this.textInput.setFocus();
   }
 
   get timestamp() {

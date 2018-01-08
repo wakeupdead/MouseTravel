@@ -1,16 +1,22 @@
 {
   "name": "MouseTravel",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "version": "0.0.3",
+  "author": "Wakeupdead",
+  "homepage": "http://mousetravel-53454.firebaseapp.com",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "prettier:base": "prettier \"./{e2e,src}/**/*.{scss,ts}\"",
+    "prettier:list": "npm run prettier:base -- --list-different",
+    "prettier": "npm run prettier:base -- --write && git add . && git status"
   },
+  "pre-commit": [
+    "prettier"
+  ],
   "dependencies": {
     "@angular/common": "5.0.3",
     "@angular/compiler": "5.0.3",
@@ -49,6 +55,8 @@
     "@compodoc/compodoc": "^1.0.5",
     "@ionic/app-scripts": "3.1.6",
     "codelyzer": "^4.0.2",
+    "pre-commit": "^1.2.2",
+    "prettier": "1.9.2",
     "tslint": "^5.8.0",
     "typescript": "2.4.2"
   },
