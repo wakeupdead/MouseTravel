@@ -8,6 +8,9 @@
 
 
 <ion-content #content>
+
+    <ion-spinner *ngIf="!(messages | async)" ></ion-spinner>
+
     <div class = "chatwindow">
       <ion-list no-lines>
         <ion-item *ngFor = "let item of (messages | async); let i = index" text-wrap>

@@ -29,12 +29,13 @@ export class LoginPage {
 
   // Attempt to login in through our User service
   login() {
-    this.userService.login().then((resp) => {
-      this.navCtrl.setRoot(MAIN_PAGE);
-      this.loggingService.log(this.loginSuccessString + resp.user.displayName, true);
+
+    this.userService.loginFacebook().then((resp) => {
+      // this.navCtrl.setRoot(MAIN_PAGE);
+      this.loggingService.log(this.loginSuccessString, true);
     }, (err) => {
       // Unable to log in
-      this.loggingService.logError(this.loginErrorString);
+      this.loggingService.logError(this.loginErrorString + ' --> ' + JSON.stringify(err));
     });
   }
 }

@@ -5,7 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FIRST_RUN_PAGE, MAIN_PAGE, LOGIN_PAGE } from '../pages/pages';
-import { Settings, UserService } from '../providers/providers';
+import { Settings, UserService, LoggingService } from '../providers/providers';
+import { Observable } from 'rxjs/Observable';
+import { User } from '../models/user';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -20,7 +22,8 @@ export class MyApp {
     { title: 'Settings', component: 'SettingsPage' }
   ];
 
-  user$: any;
+  logoutSuccessString: string;
+  user$: Observable<User>;
 
   constructor(
     private translate: TranslateService,
@@ -29,6 +32,7 @@ export class MyApp {
     private config: Config,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
+    public loggingService: LoggingService,
     public userService: UserService) {
 
     platform.ready().then(() => {
@@ -39,12 +43,11 @@ export class MyApp {
     });
     this.initTranslate();
 
-    // Assign User stream
-    this.user$ = this.userService.getUser();
-
-    this.user$.subscribe(
-      (user) => {
-        if (user) {
+    this.user$ = this.userService.getUserState();
+    // Handle auth state changes
+    this.userService.getAuthState().subscribe(
+      (isAuthenticated) => {
+        if (isAuthenticated) {
           this.nav.setRoot(MAIN_PAGE);
         } else {
           this.nav.setRoot(LOGIN_PAGE);
@@ -74,9 +77,11 @@ export class MyApp {
       this.translate.use('en'); // Set your language here
     }
 
-    this.translate.get(['BACK_BUTTON_TEXT']).subscribe(values => {
+    this.translate.get(['BACK_BUTTON_TEXT', 'LOGOUT_SUCCESS']).subscribe(values => {
       this.config.set('ios', 'backButtonText', values.BACK_BUTTON_TEXT);
+      this.logoutSuccessString = values['LOGOUT_SUCCESS'];
     });
+
   }
 
   openPage(page) {
@@ -87,8 +92,14 @@ export class MyApp {
 
 
   logout() {
+    this.userService.logout().then(function() {
+      // Sign-out successful.
+      // this.loggingService.log(this.logoutSuccessString, true);
+    }).catch(function(error) {
+      // An error happened.
+      this.loggingService.logError(error);
+    });
+    // this.nav.setRoot(FIRST_RUN_PAGE);
 
-    this.nav.setRoot(FIRST_RUN_PAGE);
-    this.userService.logout();
   }
 }
