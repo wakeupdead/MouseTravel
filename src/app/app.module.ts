@@ -14,12 +14,12 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import { Items } from '../providers/providers';
-import { Settings } from '../providers/providers';
-import { UserService } from '../providers/providers';
-import { Api, LoggingService, ChatService } from '../providers/providers';
+
+import { Api, ChatService, Settings, Items } from '../providers/providers';
 import { MyApp } from './app.component';
 import { firebaseConfig } from './app.firebase.config';
+import { UserService } from './services/user.service';
+import { LoggingService } from './services/logging.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.

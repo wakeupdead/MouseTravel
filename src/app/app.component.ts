@@ -5,9 +5,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import { FIRST_RUN_PAGE, MAIN_PAGE, LOGIN_PAGE } from '../pages/pages';
-import { Settings, UserService, LoggingService } from '../providers/providers';
+import { Settings } from '../providers/providers';
 import { Observable } from 'rxjs/Observable';
-import { User } from '../models/user';
+import { LoggingService } from './services/logging.service';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
 
 @Component({
   templateUrl: 'app.component.html'

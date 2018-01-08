@@ -14,8 +14,6 @@ export class Items {
   constructor(private readonly afs: AngularFirestore) {
     this.itemsCollection = this.afs.collection<Item>('items');
 
-    // log all changes in collection
-    this.itemsCollection.auditTrail().subscribe(console.log);
   }
 
   get timestamp() {

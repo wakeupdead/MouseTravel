@@ -2,9 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { ChatMessage } from '../../models/chat-message';
-import { ChatService, UserService } from '../../providers/providers';
+import { ChatService } from '../../providers/providers';
 import * as firebase from 'firebase/app';
-import { User } from '../../models/user';
+import { UserService } from '../../app/services/user.service';
 
 
 @IonicPage()
@@ -66,7 +66,7 @@ export class ChatPage {
   scrollToBottom() {
     setTimeout(() => {
       this.content.scrollToBottom();
-    }, 1000);
+    }, 500);
   }
 
 }

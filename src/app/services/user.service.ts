@@ -8,14 +8,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { NavController, Platform } from 'ionic-angular';
 import { LoginPage } from '../../pages/login/login';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { User } from '../../models/user';
-import { LoggingService } from '../providers';
+import { User } from '../models/user';
 
 
 @Injectable()
 export class UserService {
 
   private usersCollection: AngularFirestoreCollection<User>;
+  private usersCollectionSub: any;
   private userDoc: AngularFirestoreDocument<User>;
   private usersListSnapshot: User[];
 
@@ -31,10 +31,7 @@ export class UserService {
   ) {
 
       this.usersCollection = this.afs.collection<User>('appUsers');
-    this.usersCollection.valueChanges().subscribe(res => {
-      console.log('User profiles:', res);
-      this.usersListSnapshot = res;
-    });
+
 
     afAuth.authState.subscribe(
       (user) => {
@@ -42,7 +39,14 @@ export class UserService {
           this.currentUserDetails = user;
           console.log('Logged User: ', this.currentUserDetails);
           this.addUserProfile(user);
-      }
+
+          this.usersCollectionSub = this.usersCollection.valueChanges().subscribe(res => {
+            console.log('User profiles:', res);
+            this.usersListSnapshot = res;
+          });
+        } else {
+          if (this.usersCollectionSub) this.usersCollectionSub.unsubscribe();
+        }
       });
 
 
