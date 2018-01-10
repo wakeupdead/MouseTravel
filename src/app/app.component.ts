@@ -4,6 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
+import { Badge } from '@ionic-native/badge';
+import { Vibration } from '@ionic-native/vibration';
+import { HeaderColor } from '@ionic-native/header-color';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 import { Observable } from 'rxjs/Observable';
 import { LoggingService } from './services/logging.service';
 import { UserService } from './services/user.service';
@@ -12,6 +17,7 @@ import { SettingsService } from './services/settings.service';
 import { TabsPage } from './pages/tabs/tabs';
 import { LoginPage } from './pages/login/login';
 import { WelcomePage } from './pages/welcome/welcome';
+import { ChatService } from '../chat/services/chat.service';
 
 @Component({
   templateUrl: 'app.component.html'
@@ -37,11 +43,45 @@ export class MyApp {
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
     public loggingService: LoggingService,
-    public userService: UserService) {
+    public userService: UserService,
+    private badge: Badge,
+    private vibration: Vibration,
+    private headerColor: HeaderColor,
+    private localNotifications: LocalNotifications,
+    chatService: ChatService
+  ) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      if (platform.is('cordova')) {
+        // Header color
+        headerColor.tint('E91E63');
+
+        // Badges, Vibration, Notifications
+        if (!badge.hasPermission()) {
+          badge.registerPermission();
+        }
+        if (!localNotifications.hasPermission()) {
+          localNotifications.registerPermission();
+        }
+        badge.clear();
+        chatService.query().subscribe(() => {
+          badge.increase(1);
+          vibration.vibrate(500);
+          localNotifications.isPresent(1).then(res => {
+            if (!res) {
+              localNotifications.schedule({
+                id: 1,
+                text: 'New messages in the chat',
+                led: 'E91E63'
+              });
+            }
+          });
+        });
+      }
+
+      // App start
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

@@ -29,24 +29,23 @@ export class UserService {
     private platform: Platform
   ) {
 
+
       this.usersCollection = this.afs.collection<User>('appUsers');
+      afAuth.authState.subscribe(
+        (user) => {
+          if (user) {
+            this.currentUserDetails = user;
+            console.log('Logged User: ', this.currentUserDetails);
+            this.addUserProfile(user);
 
-
-    afAuth.authState.subscribe(
-      (user) => {
-        if (user) {
-          this.currentUserDetails = user;
-          console.log('Logged User: ', this.currentUserDetails);
-          this.addUserProfile(user);
-
-          this.usersCollectionSub = this.usersCollection.valueChanges().subscribe(res => {
-            console.log('User profiles:', res);
-            this.usersListSnapshot = res;
-          });
-        } else {
-          if (this.usersCollectionSub) this.usersCollectionSub.unsubscribe();
-        }
-      });
+            this.usersCollectionSub = this.usersCollection.valueChanges().subscribe(res => {
+              console.log('User profiles:', res);
+              this.usersListSnapshot = res;
+            });
+          } else {
+            if (this.usersCollectionSub) this.usersCollectionSub.unsubscribe();
+          }
+        });
 
 
 

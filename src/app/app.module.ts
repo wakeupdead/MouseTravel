@@ -29,6 +29,11 @@ import { LoginPageModule } from './pages/login/login.module';
 import { SettingsPageModule } from './pages/settings/settings.module';
 import { WelcomePageModule } from './pages/welcome/welcome.module';
 
+import { Badge } from '@ionic-native/badge';
+import { Vibration } from '@ionic-native/vibration';
+import { HeaderColor } from '@ionic-native/header-color';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -103,6 +108,10 @@ export function provideSettingsFactory(storage: Storage) {
     SplashScreen,
     StatusBar,
     Facebook,
+    Badge,
+    Vibration,
+    HeaderColor,
+    LocalNotifications,
 
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
