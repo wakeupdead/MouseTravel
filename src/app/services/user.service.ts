@@ -57,7 +57,7 @@ export class UserService {
     this.afs.collection<User>('appUsers', ref => ref.where('uid', '==', user.uid))
     .ref.get()
     .then(res => {
-      if (res.empty) {
+      if (res.size > 0) {
         this.usersCollection.add({
           uid: user.uid,
           photoURL: user.photoURL,
