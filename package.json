@@ -4,6 +4,7 @@
   "author": "Wakeupdead",
   "homepage": "http://mousetravel-53454.firebaseapp.com",
   "private": true,
+  "main": "electron/main.js",
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
