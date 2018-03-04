@@ -4,7 +4,7 @@ node_js:
 script:
 - ionic build
 install:
-- yarn add global firebase-tools cordova ionic @angular/cli
+- yarn global add firebase-tools cordova ionic @angular/cli
 - yarn
 after_success:
 - firebase deploy --token $FIREBASE_TOKEN
