@@ -1,5 +1,5 @@
 import { NgModule, isDevMode } from '@angular/core';
-import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './app.reducer';
 
@@ -33,4 +33,4 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     StoreModule
   ]
 })
-export class AppStoreModule { }
+export class StateModule { }

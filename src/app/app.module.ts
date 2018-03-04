@@ -19,7 +19,7 @@ import { MyApp } from './app.component';
 import { firebaseConfig } from './app.firebase.config';
 import { UserService } from './services/user.service';
 import { LoggingService } from './services/logging.service';
-import { AppStoreModule } from './store/app-store.module';
+import { StateModule } from './state/state.module';
 import { SettingsService } from './services/settings.service';
 import { ApiService } from './services/api.service';
 import { ChatModule } from '../chat/chat.module';
@@ -81,7 +81,7 @@ export function provideSettingsFactory(storage: Storage) {
     AngularFireAuthModule,
 
     // NGRX
-    AppStoreModule,
+    StateModule,
 
     // App pages
     LoginPageModule,
