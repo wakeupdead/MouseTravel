@@ -1,7 +1,7 @@
 {
   "name": "MouseTravel",
   "app_id": "96068cf6",
-  "type": "ionic-angular",
+  "type": "angular",
   "integrations": {
     "cordova": {}
   }
