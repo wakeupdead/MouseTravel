@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../core/services/user.service';
-import { LoggingService } from '../../core/services/logging.service';
+import { UserService } from 'app/core/services/user.service';
+import { LoggingService } from 'app/core/services/logging.service';
 
 @Component({
   selector: 'app-page-login',
-  templateUrl: 'login.page.html',
-  styleUrls: ['login.page.scss'],
+  templateUrl: 'login.html',
+  styleUrls: ['login.scss'],
 })
 export class LoginPage {
 
@@ -18,11 +18,13 @@ export class LoginPage {
   // Attempt to login in through our User service
   login() {
 
-    this.userService.loginFacebook().then((resp) => {
-      this.loggingService.log('Logged in', true);
-    }, (err) => {
-      // Unable to log in
-      this.loggingService.logError('Login error --> ' + JSON.stringify(err));
-    });
+    /* this.userService.loginFacebook().then((resp) => {
+        this.loggingService.log('Logged in', true);
+      }, (err) => {
+        // Unable to log in
+        this.loggingService.logError('Login error --> ' + JSON.stringify(err));
+      });
+ */
   }
 
+}

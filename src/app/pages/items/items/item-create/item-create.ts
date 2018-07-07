@@ -1,24 +1,28 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { NavController } from '@ionic/angular';
 
-@IonicPage()
 @Component({
-  selector: 'page-item-create',
-  templateUrl: 'item-create.html'
+  selector: 'app-page-item-create',
+  templateUrl: 'item-create.html',
+  styleUrls: ['item-create.scss'],
 })
 export class ItemCreatePage {
   @ViewChild('fileInput') fileInput;
 
-  isReadyToSave: boolean;
+  public isReadyToSave: boolean;
 
-  item: any;
+  public item: any;
 
-  form: FormGroup;
+  public form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
-    this.form = formBuilder.group({
+  constructor(
+    public navCtrl: NavController,
+    public fb: FormBuilder,
+    public camera: Camera) {
+
+    this.form = fb.group({
       profilePic: [''],
       name: ['', Validators.required],
       about: ['']
@@ -30,9 +34,6 @@ export class ItemCreatePage {
     });
   }
 
-  ionViewDidLoad() {
-
-  }
 
   getPicture() {
     if (Camera['installed']()) {
@@ -54,7 +55,7 @@ export class ItemCreatePage {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
 
-      let imageData = (readerEvent.target as any).result;
+      const imageData = (readerEvent.target as any).result;
       this.form.patchValue({ 'profilePic': imageData });
     };
 
@@ -62,14 +63,14 @@ export class ItemCreatePage {
   }
 
   getProfileImageStyle() {
-    return 'url(' + this.form.controls['profilePic'].value + ')'
+    return 'url(' + this.form.controls['profilePic'].value + ')';
   }
 
   /**
    * The user cancelled, so we dismiss without sending data back.
    */
   cancel() {
-    this.viewCtrl.dismiss();
+    // this.viewCtrl.dismiss();
   }
 
   /**
@@ -77,7 +78,7 @@ export class ItemCreatePage {
    * back to the presenter.
    */
   done() {
-    if (!this.form.valid) { return; }
-    this.viewCtrl.dismiss(this.form.value);
+    /* if (!this.form.valid) { return; }
+    this.viewCtrl.dismiss(this.form.value); */
   }
 }

@@ -12,7 +12,7 @@
       "es2017",
       "dom"
     ],
-    "rootDir": "src/",
+    "baseUrl": "./src",
     "paths": {
       "@app/state/*":["/app/state/*"],
       "@app/core/*":["/app/core/*"],

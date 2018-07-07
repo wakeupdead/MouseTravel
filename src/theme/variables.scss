@@ -1,4 +1,3 @@
-
 $pal: (
   50:  #FCE4EC,
   100:#F8BBD0,
@@ -39,12 +38,12 @@ $colors: (
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #488aff;
-  --ion-color-primary-rgb: 72,138,255;
+  --ion-color-primary: #E91E63;
+  --ion-color-primary-rgb: 233,30,99;
   --ion-color-primary-contrast: #fff;
   --ion-color-primary-contrast-rgb: 255,255,255;
-  --ion-color-primary-shade: #3f79e0;
-  --ion-color-primary-tint: #5a96ff;
+  --ion-color-primary-shade: #D81B60;
+  --ion-color-primary-tint: #EC407A;
 
   /** secondary **/
   --ion-color-secondary: #32db64;
@@ -101,7 +100,7 @@ $colors: (
   --ion-color-medium-contrast-rgb: 0,0,0;
   --ion-color-medium-shade: #86888f;
   --ion-color-medium-tint: #a2a4ab;
-  
+
   /** dark **/
   --ion-color-dark: #222;
   --ion-color-dark-rgb: 34,34,34;

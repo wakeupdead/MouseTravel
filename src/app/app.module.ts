@@ -8,6 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { Facebook } from '@ionic-native/facebook';
+import { CoreModule } from './core/core.module';
+import { AppComponent } from './app.component';
+import { Camera } from '@ionic-native/camera';
 
 
 @NgModule({
@@ -17,14 +20,15 @@ import { Facebook } from '@ionic-native/facebook';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ComponentsModule
+    CoreModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 
-    Facebook
+    Facebook,
+    Camera
   ],
   bootstrap: [AppComponent]
 })

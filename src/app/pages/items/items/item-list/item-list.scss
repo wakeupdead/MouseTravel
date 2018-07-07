@@ -3,18 +3,18 @@ page-list-master {
   ion-header {
     height: 200px !important;
     /*background: #FA5693 !important;*/
-    background: url("../assets/images/header-bg.png") !important;
+    background: url("../../../../../assets/images/header-bg.png") !important;
 
     ion-navbar {
       .toolbar-background {
         background-color: transparent !important;
       }
       .toolbar-title {
-        color: color($pal, 900);
+        color: var(--ion-color-primary); //color($pal, 900);
       }
 
       button {
-        color: color($pal, 900) !important;
+        color: var(--ion-color-primary); //color($pal, 900) !important;
       }
 
     }

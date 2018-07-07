@@ -9,6 +9,8 @@ import { firebaseConfig } from '../../firebase.config';
 import { ApiService } from './services/api.service';
 import { UserService } from './services/user.service';
 import { LoggingService } from './services/logging.service';
+import { SharedModule } from '../shared/shared.module';
+import { StateModule } from './state/state.module';
 
 @NgModule({
   imports: [

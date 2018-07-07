@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ToastController, AlertController } from 'ionic-angular';
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Injectable()
 export class LoggingService {
 
   constructor(public toastCtrl: ToastController, public alertCtrl: AlertController) { }
 
-  log(message: string, showToast: boolean) {
+  /* log(message: string, showToast: boolean) {
     console.log('LOG', message);
     if (showToast) {
       let toast = this.toastCtrl.create({
@@ -26,7 +26,7 @@ export class LoggingService {
       subTitle: message,
       buttons: ['OK']
     });
-    alert.present();
-  }
+    // alert.present();
+  } */
 
 }

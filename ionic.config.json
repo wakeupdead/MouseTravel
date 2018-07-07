@@ -1,8 +1,8 @@
 {
   "name": "MouseTravel",
-  "app_id": "96068cf6",
   "type": "angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "pro_id": "96068cf6"
 }

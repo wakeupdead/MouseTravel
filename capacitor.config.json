@@ -1,0 +1,6 @@
+{
+  "appId": "com.wakeupdead.app.mousetravel",
+  "appName": "mouse-travel",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}

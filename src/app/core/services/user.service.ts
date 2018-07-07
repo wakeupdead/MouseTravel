@@ -5,9 +5,9 @@ import { Facebook } from '@ionic-native/facebook';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { NavController, Platform } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { User } from '../models/user';
+import { User } from '../../models/user';
+import { Platform } from '@ionic/angular';
 
 
 @Injectable()
@@ -43,7 +43,7 @@ export class UserService {
               this.usersListSnapshot = res;
             });
           } else {
-            if (this.usersCollectionSub) this.usersCollectionSub.unsubscribe();
+            if (this.usersCollectionSub) { this.usersCollectionSub.unsubscribe(); }
           }
         });
 

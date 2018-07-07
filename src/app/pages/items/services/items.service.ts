@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-
-
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
 import { Item } from '../models/item';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ItemsService {
@@ -22,13 +21,15 @@ export class ItemsService {
   }
 
   query(params?: any): Observable<any[]> {
-    return this.itemsCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data();
-        const id = a.payload.doc.id;
-        return { id, ...data};
-      });
-    });
+    return this.itemsCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data};
+        });
+    })
+  );
   }
 
   add(item: Item) {

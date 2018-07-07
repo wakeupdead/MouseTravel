@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 import { TabsPage } from './tabs';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
-  declarations: [
-    TabsPage,
-  ],
   imports: [
-    IonicPageModule.forChild(TabsPage),
-    TranslateModule.forChild()
+    SharedModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: TabsPage
+      }
+    ])
   ],
-  exports: [
-    TabsPage
-  ]
+  declarations: [TabsPage]
 })
 export class TabsPageModule { }
