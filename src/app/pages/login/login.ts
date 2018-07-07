@@ -1,41 +1,28 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController } from 'ionic-angular';
-import { UserService } from '../../services/user.service';
-import { LoggingService } from '../../services/logging.service';
+import { UserService } from '../../core/services/user.service';
+import { LoggingService } from '../../core/services/logging.service';
 
-
-@IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html'
+  selector: 'app-page-login',
+  templateUrl: 'login.page.html',
+  styleUrls: ['login.page.scss'],
 })
 export class LoginPage {
 
-  // Our translated text strings
-  private loginSuccessString: string;
-  private loginErrorString: string;
-
-  constructor(public navCtrl: NavController,
+  constructor(
     public userService: UserService,
-    public loggingService: LoggingService,
-    public translateService: TranslateService) {
+    public loggingService: LoggingService) {
 
-    this.translateService.get(['LOGIN_ERROR', 'LOGIN_SUCCESS']).subscribe((values) => {
-      this.loginErrorString = values['LOGIN_ERROR'];
-      this.loginSuccessString = values['LOGIN_SUCCESS'];
-    });
   }
 
   // Attempt to login in through our User service
   login() {
 
     this.userService.loginFacebook().then((resp) => {
-      // this.navCtrl.setRoot(MAIN_PAGE);
-      this.loggingService.log(this.loginSuccessString, true);
+      this.loggingService.log('Logged in', true);
     }, (err) => {
       // Unable to log in
-      this.loggingService.logError(this.loginErrorString + ' --> ' + JSON.stringify(err));
+      this.loggingService.logError('Login error --> ' + JSON.stringify(err));
     });
   }
-}
+

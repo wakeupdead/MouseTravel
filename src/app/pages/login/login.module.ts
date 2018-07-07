@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 import { LoginPage } from './login';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    LoginPage
-  ],
   imports: [
-    IonicPageModule.forChild(LoginPage),
-    TranslateModule.forChild()
+    SharedModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: LoginPage
+      }
+    ])
   ],
-  exports: [
-    LoginPage
-  ]
+  declarations: [LoginPage]
 })
 export class LoginPageModule { }

@@ -11,6 +11,12 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "rootDir": "src/",
+    "paths": {
+      "@app/state/*":["/app/state/*"],
+      "@app/core/*":["/app/core/*"],
+      "@app/shared/*":["/app/shared/*"]
+    }
   }
 }
