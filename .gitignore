@@ -34,3 +34,5 @@ UserInterfaceState.xcuserstate
 
 android
 .gradle
+
+firebase.config.ts
