@@ -1,42 +1,26 @@
-$pal: (
-  50:  #FCE4EC,
-  100:#F8BBD0,
-  200:#F48FB1,
-  300:#F06292,
-  400:#EC407A,
-  500:#E91E63,
-  600:#D81B60,
-  700:#C2185B,
-  800:#AD1457,
-  900:#880E4F,
-  // A100:#FF80AB,
-  // A200:#FF4081,
-  // A400:#F50057,
-  // A700:#C51162,
-
-  A100:#FF9E80,
-  A200:#FF6E40,
-  A400:#FF3D00,
-  A700:#DD2C00,
-);
-
-$colors: (
-
-
-  primary:    color($pal, 500),
-  secondary:  color($pal, A400),
-  danger:     #f53d3d,
-  light:      color($pal, 50),
-  dark:       color($pal, 900),
-
-
-);
-
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
 :root {
+
+  /* Vars */
+  --c50:  #FCE4EC;
+  --c100: #F8BBD0;
+  --c200: #F48FB1;
+  --c300: #F06292;
+  --c400: #EC407A;
+  --c500: #E91E63;
+  --c600: #D81B60;
+  --c700: #C2185B;
+  --c800: #AD1457;
+  --c900: #880E4F;
+
+  /* Overrides */
+  --ion-background-color: var(--c200);
+  --ion-toolbar-background-color: var(--c100);
+  --ion-toolbar-text-color: var(--c800);
+
   /** primary **/
   --ion-color-primary: #E91E63;
   --ion-color-primary-rgb: 233,30,99;
@@ -108,4 +92,8 @@ $colors: (
   --ion-color-dark-contrast-rgb: 255,255,255;
   --ion-color-dark-shade: #1e1e1e;
   --ion-color-dark-tint: #383838;
+}
+
+app-page-item-list {
+  --ion-toolbar-background-color: transparent;
 }

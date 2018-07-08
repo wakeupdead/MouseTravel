@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'items',
     loadChildren: './pages/items/items.module#ItemsModule'
+  },
+  {
+    path: 'tabs',
+    loadChildren: './pages/tabs/tabs.module#TabsPageModule'
   }
 ];
 @NgModule({

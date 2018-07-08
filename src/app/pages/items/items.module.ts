@@ -13,14 +13,9 @@ import { ItemCreatePage } from './items/item-create/item-create';
     SharedModule,
     IonicModule,
     RouterModule.forChild([
-      {
-        path: '',
-        children: [
-          { path: '', component: ItemListPage},
-          { path: 'detail', component: ItemDetailPage},
-          { path: 'create', component: ItemCreatePage}
-        ]
-      }
+      { path: '', component: ItemListPage},
+      { path: 'detail/:id', component: ItemDetailPage},
+      { path: 'create', component: ItemCreatePage}
     ])
   ],
   declarations: [

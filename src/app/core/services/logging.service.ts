@@ -6,10 +6,10 @@ export class LoggingService {
 
   constructor(public toastCtrl: ToastController, public alertCtrl: AlertController) { }
 
-  /* log(message: string, showToast: boolean) {
+  async log(message: string, showToast: boolean) {
     console.log('LOG', message);
     if (showToast) {
-      let toast = this.toastCtrl.create({
+      const toast = await this.toastCtrl.create({
         message: message,
         duration: 3000,
         position: 'top'
@@ -19,14 +19,14 @@ export class LoggingService {
 
   }
 
-  logError(message: string) {
+  async logError(message: string) {
     console.log('LOG', message);
-    let alert = this.alertCtrl.create({
-      title: 'Error',
-      subTitle: message,
+    const alert = await this.alertCtrl.create({
+      header: 'Error',
+      message: message,
       buttons: ['OK']
     });
-    // alert.present();
-  } */
+    await alert.present();
+  }
 
 }

@@ -26,12 +26,13 @@ import { StateModule } from './state/state.module';
     // NGRX
     StateModule,
 
-    ApiService,
-    UserService,
-    LoggingService,
-
   ],
   declarations: [],
   entryComponents: [],
+  providers: [
+    ApiService,
+    UserService,
+    LoggingService,
+  ]
 })
 export class CoreModule {}

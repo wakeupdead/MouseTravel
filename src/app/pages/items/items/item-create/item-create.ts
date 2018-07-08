@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Camera } from '@ionic-native/camera';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
+import { Capacitor, Plugins, CameraResultType } from '@capacitor/core';
 
 @Component({
   selector: 'app-page-item-create',
@@ -20,7 +20,8 @@ export class ItemCreatePage {
   constructor(
     public navCtrl: NavController,
     public fb: FormBuilder,
-    public camera: Camera) {
+    public modalCtrl: ModalController
+  ) {
 
     this.form = fb.group({
       profilePic: [''],
@@ -36,19 +37,26 @@ export class ItemCreatePage {
 
 
   getPicture() {
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
-      }).then((data) => {
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-      }, (err) => {
-        alert('Unable to take photo');
-      })
-    } else {
+
+    const isAvailable = Capacitor.isPluginAvailable('Camera');
+    const { Camera } = Plugins;
+
+    if (!isAvailable) {
+      // Have the user upload a file instead
       this.fileInput.nativeElement.click();
+    } else {
+      // Otherwise, make the call:
+      Camera.getPhoto({
+          quality: 100,
+          resultType: CameraResultType.Base64
+      }).then((result) => {
+        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + result });
+      }).catch((err) => {
+          console.log(err);
+          console.log('Sorry pal, not going to happen');
+      });
     }
+
   }
 
   processWebImage(event) {
@@ -70,7 +78,7 @@ export class ItemCreatePage {
    * The user cancelled, so we dismiss without sending data back.
    */
   cancel() {
-    // this.viewCtrl.dismiss();
+    this.modalCtrl.dismiss();
   }
 
   /**

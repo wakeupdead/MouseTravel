@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
+  public slideOpts = {
+    effect: 'flip'
+  };
+
   constructor() {
 
   }

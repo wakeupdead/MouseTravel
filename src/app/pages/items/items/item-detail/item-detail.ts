@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from '@ionic/angular';
 import { ItemsService } from '../../services/items.service';
 import { Item } from '../../models/item';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-page-item-detail',
@@ -11,15 +13,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ItemDetailPage {
 
-  public item: Item;
+  public item$: Observable<Item>;
 
-  constructor(private route: ActivatedRoute){
-
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private itemsService: ItemsService
+  ) { }
 
   ionViewWillEnter() {
-    let id = this.route.snapshot.paramMap.get('id');
-    // this.item = this.todoService.getTodo(id);
+    this.item$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        return this.itemsService.get(params.get('id'));
+      }));
   }
 
 

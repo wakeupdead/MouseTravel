@@ -1,5 +1,6 @@
-page-item-detail {
+
   .item-profile {
+    padding-top: 2px;
     width: 100%;
     background-position: center center;
     background-size: cover;
@@ -8,7 +9,6 @@ page-item-detail {
 
   .item-detail {
     width: 100%;
-    background: white;
+    background: var(--c50);
     position: absolute;
   }
-}

@@ -1,27 +1,30 @@
+
 <ion-header>
-
   <ion-toolbar>
-    <ion-title>{{ item.name }}</ion-title>
-
-    <ion-buttons end>
-      <button ion-button icon-only (click)="deleteItem()">
-        <ion-icon name="trash"></ion-icon>
-      </button>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-title>
+      {{ (item$ | async)?.name }}
+    </ion-title>
   </ion-toolbar>
-
 </ion-header>
 
-
-
 <ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
+
+    <ion-fab slot="fixed" edge="true" vertical="top" horizontal="end">
+        <ion-fab-button icon-only (click)="deleteItem()">
+            <ion-icon name="trash"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + (item$ | async)?.profilePic + ')'">
   </div>
 
   <div class="item-detail" padding>
-    <h2>{{item.name}} - {{item.id}}</h2>
-    <p>{{item.about}}</p>
-    <p>{{item.meta | json}}</p>
+    <h2>{{(item$ | async)?.name}} - {{(item$ | async)?.id}}</h2>
+    <p>{{(item$ | async)?.about}}</p>
+    <p>{{(item$ | async) | json}}</p>
   </div>
 
 </ion-content>

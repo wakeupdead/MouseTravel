@@ -18,13 +18,13 @@ export class LoginPage {
   // Attempt to login in through our User service
   login() {
 
-    /* this.userService.loginFacebook().then((resp) => {
+    this.userService.loginFacebook().then((resp) => {
         this.loggingService.log('Logged in', true);
       }, (err) => {
         // Unable to log in
         this.loggingService.logError('Login error --> ' + JSON.stringify(err));
       });
- */
+
   }
 
 }

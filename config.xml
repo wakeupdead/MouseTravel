@@ -78,12 +78,12 @@
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
-    <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="1.1.19" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="2.0.5" />
-    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
-    <plugin name="cordova-plugin-facebook4" spec="^2.2.0">
+    <plugin name="cordova-plugin-facebook5" spec="^1.9.1">
         <variable name="APP_ID" value="1899402153722930" />
         <variable name="APP_NAME" value="Mouse Travel" />
     </plugin>
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
 </widget>

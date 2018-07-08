@@ -32,6 +32,16 @@ export class ItemsService {
   );
   }
 
+  get(id): Observable<Item> {
+    return this.afs.doc<Item>('items/' + id).snapshotChanges().pipe(
+        map(actions => {
+          const data = actions.payload.data();
+          const id = actions.payload.id;
+          return { id, ...data};
+      })
+    );
+  }
+
   add(item: Item) {
     item.createdAt = this.timestamp;
     item.updatedAt = this.timestamp;

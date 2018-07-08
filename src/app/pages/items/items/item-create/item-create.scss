@@ -1,11 +1,11 @@
-page-item-create {
+
   .profile-image-wrapper {
     text-align: center;
     margin: 20px 0;
 
     .profile-image {
-      width: 96px;
-      height: 96px;
+      width: 106px;
+      height: 106px;
       border-radius: 50%;
 
       display: inline-block;
@@ -18,9 +18,9 @@ page-item-create {
     .profile-image-placeholder {
       display: inline-block;
 
-      background-color: var(--ion-color-primary);
-      width: 96px;
-      height: 96px;
+      background-color: var(--c100);
+      width: 106px;
+      height: 106px;
       border-radius: 50%;
 
       font-size: 12px;
@@ -32,4 +32,3 @@ page-item-create {
       }
     }
   }
-}

@@ -1,13 +1,12 @@
-import 'rxjs/add/operator/toPromise';
-
 import { Injectable } from '@angular/core';
-import { Facebook } from '@ionic-native/facebook';
 
-import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { User } from '../../models/user';
 import { Platform } from '@ionic/angular';
+import {auth} from 'firebase/app';
+
+import { map } from 'rxjs/operators';
 
 
 @Injectable()
@@ -25,7 +24,7 @@ export class UserService {
     private afAuth: AngularFireAuth,
     private readonly afs: AngularFirestore,
     // loggingService: LoggingService
-    private facebook: Facebook,
+    // private facebook: Facebook,
     private platform: Platform
   ) {
 
@@ -56,10 +55,10 @@ export class UserService {
     this.afs.collection<User>('appUsers', ref => ref.where('uid', '==', user.uid))
     .ref.get()
     .then(res => {
-      if (res.size > 0) {
+      if (res.size === 0) {
         this.usersCollection.add({
           uid: user.uid,
-          photoURL: user.photoURL,
+          photoURL: user.providerData[0].photoURL,
           displayName: user.displayName });
       }
     });
@@ -71,15 +70,15 @@ export class UserService {
 
   loginFacebook() {
 
-    if (this.platform.is('cordova')) {
+    /* if (this.platform.is('cordova')) {
       return this.facebook.login(['email', 'public_profile']).then(res => {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
         return firebase.auth().signInWithCredential(facebookCredential);
       });
-    } else {
+    } else { */
       return this.afAuth.auth
-        .signInWithPopup(new firebase.auth.FacebookAuthProvider());
-    }
+        .signInWithPopup(new auth.FacebookAuthProvider());
+    /* } */
 
     // this.afAuth.auth
     //   .signInWithRedirect(new firebase.auth.FacebookAuthProvider());
@@ -121,22 +120,22 @@ export class UserService {
   }
 
   getUserState() {
-    return this.afAuth.authState.map(x => {
+    return this.afAuth.user.pipe(map(x => {
       if (x) {
         return {
           uid: x.uid,
-          photoURL: x.photoURL,
+          photoURL: x.providerData[0].photoURL,
           displayName: x.displayName
         };
       }
       return undefined;
-    });
+    }));
   }
 
   getAuthState() {
-    return this.afAuth.authState.map(x => {
+    return this.afAuth.user.pipe(map(x => {
       return (x) ? true : false;
-    });
+    }));
   }
 
   getUserDetails() {

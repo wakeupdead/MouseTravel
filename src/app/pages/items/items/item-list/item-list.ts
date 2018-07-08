@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ItemsService } from '../../services/items.service';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { ItemCreatePage } from '../item-create/item-create';
 
 @Component({
   selector: 'app-page-item-list',
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class ItemListPage implements OnInit {
 
-  public currentItems: Observable<Item[]>;
+  public items$: Observable<Item[]>;
 
   constructor(
     public router: Router,
@@ -22,21 +23,20 @@ export class ItemListPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentItems = this.itemsService.query();
+    this.items$ = this.itemsService.query();
   }
+
 
   /**
    * Prompt the user to add a new item. This shows our ItemCreatePage in a
    * modal and then adds the new item to our data source if the user created one.
    */
-  addItem() {
-    /* let addModal = this.modalCtrl.create'ItemCreatePage');
-    addModal.onDidDismiss(item => {
-      if (item) {
-        this.itemsService.add(item);
-      }
-    })
-    addModal.present(); */
+  async addItem() {
+    const modal = await this.modalCtrl.create({
+        component: ItemCreatePage
+    });
+    return await modal.present();
+
   }
 
   /**

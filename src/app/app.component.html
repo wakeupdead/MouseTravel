@@ -1,15 +1,15 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu *ngIf="(user$ | async)">
       <ion-header>
         <ion-toolbar class="main-toolbar">
           <ion-title>MOUSE TRAVEL</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content *ngIf="(user$ | async)">
+      <ion-content >
           <ion-list class="user-info">
               <ion-item >
-                  <ion-avatar item-start>
+                  <ion-avatar slot="start">
                       <img src="{{(user$ | async)?.photoURL}}" />
                     </ion-avatar>
                     <p>Welcome, {{(user$ | async)?.displayName}}</p>
@@ -25,7 +25,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-menu-toggle auto-hide="false">
               <ion-item (click)="logout()">
                 <ion-icon slot="start" [name]="'exit'"></ion-icon>
                 <ion-label>
@@ -36,8 +36,6 @@
         </ion-list>
       </ion-content>
     </ion-menu>
-
-
 
     <ion-router-outlet main></ion-router-outlet>
 

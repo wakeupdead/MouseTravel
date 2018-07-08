@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
 
   <ion-toolbar>
     <ion-title>Create item</ion-title>
@@ -20,11 +20,21 @@
     </ion-buttons>
   </ion-toolbar>
 
-</ion-header>
+</ion-header> -->
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        New item
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
+  <ion-content>
 
-<ion-content>
-  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
+  <form [formGroup]="form" (ngSubmit)="createItem()">
     <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
     <div class="profile-image-wrapper" (click)="getPicture()">
       <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
@@ -44,4 +54,21 @@
       </ion-item>
     </ion-list>
   </form>
+
+
 </ion-content>
+
+<ion-footer>
+
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="cancel()">
+                <ion-icon slot="icon-only" name="close" ></ion-icon>
+              </ion-button>
+              <ion-button (click)="done()" [disabled]="!isReadyToSave">
+                <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+              </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-footer>

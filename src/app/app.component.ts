@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { Plugins, Capacitor } from '@capacitor/core';
+const { SplashScreen } = Plugins;
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { User } from './models/user';
 import { Observable } from 'rxjs';
 import { UserService } from './core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,32 +17,26 @@ export class AppComponent {
 
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
       title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
-    {
-      title: 'Settings',
-      url: '/settings',
+      url: '/items',
       icon: 'list'
     },
     {
       title: 'Chat',
       url: '/chat',
-      icon: 'list'
+      icon: 'chatbubbles'
+    },
+    {
+      title: 'Settings',
+      url: '/tabs',
+      icon: 'cog'
     }
   ];
 
   public user$: Observable<User>;
 
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
+    private router: Router,
     private statusBar: StatusBar,
     private userService: UserService
   ) {
@@ -48,23 +44,31 @@ export class AppComponent {
 
     // Handle auth state changes
     this.userService.getAuthState().subscribe(
-      /* (isAuthenticated) => {
+      (isAuthenticated) => {
         if (isAuthenticated) {
-          this.nav.setRoot(TabsPage);
+          this.router.navigateByUrl('/items');
         } else {
-          this.nav.setRoot(LoginPage);
+          this.router.navigateByUrl('/login');
         }
-      } */
+      }
     );
+
+    this.user$ = this.userService.getUserState();
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+    this.statusBar.styleDefault();
 
-      this.user$ = this.userService.getUserState();
-    });
+      const isAvailable = Capacitor.isPluginAvailable('SplashScreen');
+
+      if (!isAvailable) {
+        // ...
+      } else {
+        SplashScreen.hide();
+      }
+
+
+      // this.user$ = this.userService.getUserState();
   }
 
 
@@ -76,7 +80,6 @@ export class AppComponent {
       // An error happened.
       this.loggingService.logError(error);
     });
-    // this.nav.setRoot(FIRST_RUN_PAGE);
 
   }
 }
