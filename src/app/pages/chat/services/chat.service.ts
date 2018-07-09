@@ -29,7 +29,7 @@ export class ChatService {
           const id = a.payload.doc.id;
           return { id, ...data};
         });
-    })
+    }));
   }
 
   add(item: ChatMessage) {
