@@ -5,6 +5,7 @@ import { ChatMessage } from '../models/chat-message';
 import { UserService } from 'app/core/services/user.service';
 import { ChatService } from '../services/chat.service';
 import {auth, firestore} from 'firebase/app';
+import { User } from 'app/models/user';
 
 @Component({
   selector: 'app-page-chat',
@@ -17,14 +18,16 @@ export class ChatPage {
 
   public newMessageText = '';
   public messages$: Observable<ChatMessage[]>;
-  public currentUserUid: string;
+  public currentUser$: Observable<User>;
+  public userProfiles$: Observable<User[]>;
 
   constructor(
     public userService: UserService,
     public chatService: ChatService,
   ) {
-    // this.currentUserUid = auth().currentUser.uid;
+    this.currentUser$ = this.userService.getUserState();
     this.messages$ = this.chatService.query();
+    this.userProfiles$ = this.userService.getUserProfilesList();
   }
 
   ionViewDidLoad() {

@@ -7,6 +7,7 @@ import { Platform } from '@ionic/angular';
 import {auth} from 'firebase/app';
 
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -18,7 +19,6 @@ export class UserService {
   private usersListSnapshot: User[];
 
   private currentUserDetails: firebase.User = undefined;
-
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -47,7 +47,6 @@ export class UserService {
         });
 
 
-
    }
 
   addUserProfile(user: firebase.User) {
@@ -65,7 +64,13 @@ export class UserService {
   }
 
   getUserProfile(uid: string): User {
-    return this.usersListSnapshot.find(value => value.uid === uid);
+    return this.usersListSnapshot != undefined ?
+      this.usersListSnapshot.find(value => value.uid === uid) :
+      undefined;
+  }
+
+  getUserProfilesList(): Observable<User[]> {
+    return this.usersCollection.valueChanges();
   }
 
   loginFacebook() {
@@ -119,7 +124,7 @@ export class UserService {
     return this.afAuth.auth.signOut();
   }
 
-  getUserState() {
+  getUserState(): Observable<User> {
     return this.afAuth.user.pipe(map(x => {
       if (x) {
         return {

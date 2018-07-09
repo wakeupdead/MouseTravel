@@ -90,5 +90,4 @@
         <variable name="APP_ID" value="1899402153722930" />
         <variable name="APP_NAME" value="Mouse Travel" />
     </plugin>
-    <engine name="android" spec="7.0.0" />
 </widget>
