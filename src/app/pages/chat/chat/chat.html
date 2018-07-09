@@ -10,20 +10,20 @@
 </ion-header>
 
 
-<ion-content #content>
+<ion-content #content class="">
 
     <ion-spinner *ngIf="!(messages$ | async)" ></ion-spinner>
 
     <div class = "chatwindow">
       <ion-list>
         <ion-item *ngFor = "let item of (messages$ | async); let i = index" text-wrap>
-          <ion-avatar item-left *ngIf="item?.author != currentUserUid">
+          <ion-avatar slot="end" *ngIf="item?.author != currentUserUid">
             <img src="{{getUserPhotoUrl(item?.author)}}">
           </ion-avatar>
           <div class="bubble me" *ngIf="item?.author != currentUserUid">
             <h3>{{item.message}}</h3>
           </div>
-          <ion-avatar item-right *ngIf="item?.author == currentUserUid">
+          <ion-avatar slot="start" *ngIf="item?.author == currentUserUid">
             <img src="{{getUserPhotoUrl(item?.author)}}">
           </ion-avatar>
           <div class="bubble you" *ngIf="item?.author == currentUserUid">
@@ -42,6 +42,6 @@
             <ion-icon slot="icon-only" name="send" color="secondary"></ion-icon>
           </ion-button>
         </ion-buttons>
-        
+
       </ion-toolbar>
     </ion-footer>

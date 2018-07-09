@@ -1,10 +1,10 @@
 
-  .chat {
-    width: 320px;
-
+.input-wrapper {
+  display: block !important;
+}
 
 .bubble{
-    background-color: #F2F2F2;
+    background-color: var(--c50);
     border-radius: 5px;
     box-shadow: 0 0 6px #B2B2B2;
     display: inline-block;
@@ -14,7 +14,7 @@
 }
 
 .bubble::before {
-    background-color: #F2F2F2;
+    background-color: var(--c50);
     content: "\00a0";
     display: block;
     height: 16px;
@@ -28,27 +28,27 @@
     width:  20px;
 }
 
-.me {
+.you {
     float: left;
     margin: 5px 45px 5px 20px;
 }
 
-.me::before {
+.you::before {
     box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
     left: -9px;
 }
 
-.you {
+.me {
     float: right;
     margin: 5px 20px 5px 45px;
 }
 
-.you::before {
+.me::before {
     box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
     right: -9px;
 }
 
 .chatwindow {
+  padding-top: 20px;
     padding-bottom: 70px;
-}
 }
