@@ -21,15 +21,16 @@ export class ChatService {
 
 
   query(params?: any): Observable<any[]> {
-    // return this.messagesCollection.valueChanges();
-    return this.messagesCollection.snapshotChanges().pipe(
+    this.messagesCollection.valueChanges().subscribe(console.log);
+    return this.messagesCollection.valueChanges();
+    /* return this.messagesCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
           return { id, ...data};
         });
-    }));
+    })); */
   }
 
   add(item: ChatMessage) {

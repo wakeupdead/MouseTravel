@@ -24,6 +24,7 @@ export class ChatPage {
     public chatService: ChatService,
   ) {
     // this.currentUserUid = auth().currentUser.uid;
+    this.messages$ = this.chatService.query();
   }
 
   ionViewDidLoad() {

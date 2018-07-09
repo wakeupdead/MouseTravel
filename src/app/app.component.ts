@@ -46,7 +46,7 @@ export class AppComponent {
     this.userService.getAuthState().subscribe(
       (isAuthenticated) => {
         if (isAuthenticated) {
-          this.router.navigateByUrl('/items');
+          this.router.navigateByUrl('/chat');
         } else {
           this.router.navigateByUrl('/login');
         }
