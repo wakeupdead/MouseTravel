@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: './pages/tabs/tabs.module#TabsPageModule'
+  },
+  {
+    path: 'chat',
+    loadChildren: './pages/chat/chat.module#ChatModule'
   }
 ];
 @NgModule({
