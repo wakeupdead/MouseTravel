@@ -11,6 +11,7 @@ import { UserService } from './services/user.service';
 import { LoggingService } from './services/logging.service';
 import { SharedModule } from '../shared/shared.module';
 import { StateModule } from './state/state.module';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { StateModule } from './state/state.module';
     ApiService,
     UserService,
     LoggingService,
+    Facebook
   ]
 })
 export class CoreModule {}

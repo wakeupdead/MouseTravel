@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Plugins, Capacitor } from '@capacitor/core';
 const { SplashScreen } = Plugins;
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { User } from './models/user';
 import { Observable } from 'rxjs';
 import { UserService } from './core/services/user.service';
@@ -37,7 +36,6 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private statusBar: StatusBar,
     private userService: UserService
   ) {
     this.initializeApp();
@@ -57,15 +55,14 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.statusBar.styleDefault();
 
-      const isAvailable = Capacitor.isPluginAvailable('SplashScreen');
+      /* const isAvailable = Capacitor.isPluginAvailable('SplashScreen');
 
       if (!isAvailable) {
         // ...
       } else {
         SplashScreen.hide();
-      }
+      } */
 
 
       // this.user$ = this.userService.getUserState();

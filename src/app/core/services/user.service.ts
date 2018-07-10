@@ -5,9 +5,10 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { User } from '../../models/user';
 import { Platform } from '@ionic/angular';
 import {auth} from 'firebase/app';
-
+import { Facebook } from '@ionic-native/facebook/ngx';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { LoggingService } from './logging.service';
 
 
 @Injectable()
@@ -23,8 +24,8 @@ export class UserService {
   constructor(
     private afAuth: AngularFireAuth,
     private readonly afs: AngularFirestore,
-    // loggingService: LoggingService
-    // private facebook: Facebook,
+    private loggingService: LoggingService,
+    private fb: Facebook,
     private platform: Platform
   ) {
 
@@ -64,7 +65,7 @@ export class UserService {
   }
 
   getUserProfile(uid: string): User {
-    return this.usersListSnapshot != undefined ?
+    return this.usersListSnapshot !== undefined ?
       this.usersListSnapshot.find(value => value.uid === uid) :
       undefined;
   }
@@ -75,15 +76,15 @@ export class UserService {
 
   loginFacebook() {
 
-    /* if (this.platform.is('cordova')) {
-      return this.facebook.login(['email', 'public_profile']).then(res => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
-        return firebase.auth().signInWithCredential(facebookCredential);
+    if (this.platform.is('cordova')) {
+       this.fb.login(['email', 'public_profile']).then(res => {
+        const facebookCredential = auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        return this.afAuth.auth.signInWithCredential(facebookCredential);
       });
-    } else { */
+    } else {
       return this.afAuth.auth
         .signInWithPopup(new auth.FacebookAuthProvider());
-    /* } */
+    }
 
     // this.afAuth.auth
     //   .signInWithRedirect(new firebase.auth.FacebookAuthProvider());
