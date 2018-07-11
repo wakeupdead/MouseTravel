@@ -33,6 +33,7 @@ export class AppComponent {
   ];
 
   public user$: Observable<User>;
+  public appReady = false;
 
   constructor(
     private router: Router,
@@ -56,13 +57,13 @@ export class AppComponent {
 
   initializeApp() {
 
-      /* const isAvailable = Capacitor.isPluginAvailable('SplashScreen');
+      const isAvailable = Capacitor.isPluginAvailable('SplashScreen');
 
       if (!isAvailable) {
-        // ...
+        this.appReady = true;
       } else {
         SplashScreen.hide();
-      } */
+      }
 
 
       // this.user$ = this.userService.getUserState();

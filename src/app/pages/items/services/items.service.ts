@@ -32,7 +32,7 @@ export class ItemsService {
   );
   }
 
-  get(id): Observable<Item> {
+  get(id): Observable<any> {
     return this.afs.doc<Item>('items/' + id).snapshotChanges().pipe(
         map(actions => {
           const data = actions.payload.data();

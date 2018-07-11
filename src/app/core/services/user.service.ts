@@ -126,7 +126,7 @@ export class UserService {
   }
 
   getUserState(): Observable<User> {
-    return this.afAuth.user.pipe(map(x => {
+    return this.afAuth.authState.pipe(map(x => {
       if (x) {
         return {
           uid: x.uid,
@@ -139,7 +139,7 @@ export class UserService {
   }
 
   getAuthState() {
-    return this.afAuth.user.pipe(map(x => {
+    return this.afAuth.authState.pipe(map(x => {
       return (x) ? true : false;
     }));
   }

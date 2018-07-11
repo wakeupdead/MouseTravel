@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastController, AlertController } from '@ionic/angular';
+/* import { Plugins } from '@capacitor/core';
+const { Toast } = Plugins; */
 
 @Injectable()
 export class LoggingService {
@@ -15,6 +17,11 @@ export class LoggingService {
         position: 'top'
       });
       toast.present();
+
+      /* await Toast.show({
+        text: message,
+        duration: 'short'
+      }); */
     }
 
   }
