@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { Plugins, Capacitor } from '@capacitor/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { User } from '../../models/user';
@@ -32,12 +32,15 @@ export class UserService {
 
       this.usersCollection = this.afs.collection<User>('appUsers');
       afAuth.authState.subscribe(
-        (user) => {
+        async (user) => {
           if (user) {
             this.currentUserDetails = user;
             console.log('Logged User: ', this.currentUserDetails);
             this.addUserProfile(user);
-
+            await Plugins.Storage.set({
+              key: 'user',
+              value: JSON.stringify(user)
+            });
             this.usersCollectionSub = this.usersCollection.valueChanges().subscribe(res => {
               console.log('User profiles:', res);
               this.usersListSnapshot = res;
@@ -120,8 +123,9 @@ export class UserService {
   /**
    * Log the user out, which forgets the session
    */
-  logout() {
+  async logout() {
 
+    await Plugins.Storage.clear();
     return this.afAuth.auth.signOut();
   }
 

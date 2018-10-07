@@ -50,7 +50,7 @@ export class ItemCreatePage {
           quality: 100,
           resultType: CameraResultType.Base64
       }).then((result) => {
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + result });
+        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + result.base64Data });
       }).catch((err) => {
           console.log(err);
           console.log('Sorry pal, not going to happen');
