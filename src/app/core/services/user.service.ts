@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Plugins, Capacitor } from '@capacitor/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from '../../models/user';
 import { Platform } from '@ionic/angular';
 import {auth} from 'firebase/app';
